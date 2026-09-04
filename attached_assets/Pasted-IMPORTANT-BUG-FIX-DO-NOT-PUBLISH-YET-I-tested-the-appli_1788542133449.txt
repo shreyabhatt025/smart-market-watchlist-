@@ -1,0 +1,124 @@
+IMPORTANT BUG FIX — DO NOT PUBLISH YET.
+
+I tested the application in a narrow/mobile viewport and found a serious UI rendering bug.
+
+See the screenshots I provided.
+
+ISSUES OBSERVED:
+
+1. On narrow/mobile viewport, multiple elements overlap:
+- "Personal market desk"
+- "Market Watchlist"
+- "Preferences"
+- "Thursday Workspace / Attention Desk"
+- Hero heading
+- Supporting description
+- Search
+- Attention section
+- Stock card
+
+The layout is not properly responsive.
+
+2. After clicking/interacting with the UI, parts of the page appear transparent/washed out and some text appears layered on top of other text.
+
+This must be investigated as an actual CSS/rendering/state bug.
+
+DO NOT simply reduce opacity or hide elements to make the problem disappear.
+
+DO NOT rebuild the application.
+
+DO NOT change product logic, APIs, database, scoring, detection or architecture.
+
+FIX THE ROOT CAUSE.
+
+RESPONSIVE REQUIREMENTS:
+
+Desktop:
+- Preserve the current good desktop layout.
+- Do not unnecessarily change its visual hierarchy.
+
+Tablet:
+- Properly reflow header, controls, search and cards.
+- No overlapping elements.
+
+Mobile:
+- Use a clean single-column layout.
+- Header elements must wrap/reflow instead of overlapping.
+- Hero heading must fit within viewport.
+- Supporting text must wrap naturally.
+- Search and "Tune thresholds" controls should stack when necessary.
+- Attention cards must become single-column.
+- No horizontal overflow.
+- No clipped text.
+- No elements positioned on top of unrelated elements.
+
+CHECK THESE COMMON ROOT CAUSES:
+
+- fixed widths
+- absolute positioning
+- negative margins
+- incorrect z-index
+- fixed heights
+- overflow hidden
+- opacity accidentally applied to parent containers
+- backdrop/overlay remaining active after click
+- modal/drawer backdrop not being removed
+- transform/scale causing unexpected layering
+- pointer/focus states
+- responsive breakpoints
+- desktop-only flex/grid assumptions
+
+TRANSPARENCY BUG:
+
+Trace the interaction that causes the transparent appearance.
+
+Inspect:
+- modal/drawer overlays
+- backdrop elements
+- opacity classes
+- CSS transitions
+- hover/focus/active states
+- z-index stacking contexts
+- conditional rendering
+- click handlers
+- body/page overlay state
+
+Make sure that after clicking a button or closing an interaction:
+- the main page remains fully opaque
+- text remains readable
+- no invisible overlay remains above the page
+- no parent container gets unintended opacity
+- buttons remain interactive
+- scrolling works normally
+
+IMPORTANT UI QUALITY:
+
+The mobile version should NOT look like a compressed desktop page.
+
+It should look intentionally designed for mobile while preserving the same product identity.
+
+Keep the visual direction:
+CLEAN
+PREMIUM FINTECH
+CALM
+TRUSTWORTHY
+DATA-FIRST
+
+Do not add decorative UI.
+
+After fixing:
+1. Test desktop.
+2. Test tablet.
+3. Test mobile/narrow viewport.
+4. Click all interactive controls on the dashboard.
+5. Open/close any modal or drawer.
+6. Verify no transparency/overlay remains.
+7. Verify no horizontal scrolling.
+8. Verify no overlapping text.
+9. Run the build.
+10. Fix any errors.
+
+Do not add new features.
+Do not publish yet.
+
+Report exactly what caused the transparency/overlap bug and what you changed to fix it.

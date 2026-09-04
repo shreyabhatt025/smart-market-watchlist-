@@ -19,7 +19,7 @@ export function AppShell({ user, children }: { user?: User; children: ReactNode 
         <div className="mt-4 flex items-center gap-3 border-t border-sidebar-border pt-4"><span className="grid size-9 place-items-center rounded-full bg-sidebar-primary font-data text-xs text-sidebar-primary-foreground">{initials}</span><div className="min-w-0"><p className="truncate text-sm font-medium">{user?.name || 'Market watcher'}</p><p className="truncate text-xs text-sidebar-foreground/55">{user?.email || 'Personal desk'}</p></div></div>
       </div>
     </aside>
-    {mobileOpen && <button className="fixed inset-0 z-30 bg-foreground/20 lg:hidden" onClick={() => setMobileOpen(false)} aria-label="Close navigation" data-testid="button-dismiss-menu" />}
+    {mobileOpen && <button className="fixed inset-0 z-30 bg-background lg:hidden" onClick={() => setMobileOpen(false)} aria-label="Close navigation" data-testid="button-dismiss-menu" />}
     <main className="min-w-0">
       <header className="flex h-[72px] items-center justify-between border-b border-border/70 bg-background px-5 sm:px-8">
         <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu" data-testid="button-open-menu"><Menu /></Button>

@@ -21,7 +21,7 @@ export function AppShell({ user, children }: { user?: User; children: ReactNode 
     </aside>
     {mobileOpen && <button className="fixed inset-0 z-30 bg-foreground/20 lg:hidden" onClick={() => setMobileOpen(false)} aria-label="Close navigation" data-testid="button-dismiss-menu" />}
     <main className="min-w-0">
-      <header className="flex h-[72px] items-center justify-between border-b border-border/70 bg-background/90 px-5 backdrop-blur sm:px-8">
+      <header className="flex h-[72px] items-center justify-between border-b border-border/70 bg-background px-5 sm:px-8">
         <Button variant="ghost" size="icon" className="lg:hidden" onClick={() => setMobileOpen(true)} aria-label="Open menu" data-testid="button-open-menu"><Menu /></Button>
         <div className="hidden items-center gap-2 text-xs text-muted-foreground sm:flex"><span className="size-1.5 rounded-full bg-primary" />Personal market desk</div>
         <div className="ml-auto flex items-center gap-3 text-xs text-muted-foreground"><span className="hidden sm:inline">Quietly keeping watch</span><span className="font-data text-[10px] uppercase tracking-[.14em]">Local time</span></div>

@@ -65,20 +65,20 @@ export function ScoreRing({ score, compact = false }: { score: number; compact?:
 
 export function AttentionCard({ item, rank }: { item: MarketItem; rank: number }) {
   return <Link href={`/stocks/${item.symbol}`} className="focus-ring group block" data-testid={`card-attention-${item.symbol}`}>
-    <Card className="relative h-full overflow-hidden border-card-border bg-card transition-transform duration-200 group-hover:-translate-y-0.5">
+    <Card className="relative h-full overflow-hidden border-card-border bg-card shadow-none transition-colors duration-200 group-hover:border-accent/60 group-hover:bg-card/80">
       <div className="absolute inset-y-0 left-0 w-1 bg-accent" />
-      <div className="flex h-full gap-4 p-5 pl-6">
+      <div className="flex h-full gap-4 p-4 pl-5 sm:p-5 sm:pl-6">
         <div className="flex flex-col items-center gap-2">
           <span className="font-data text-[10px] text-muted-foreground">0{rank}</span>
           <ScoreRing score={item.attention.score} compact />
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-start justify-between gap-2">
-            <div><span className="font-data text-sm font-medium text-primary">{item.symbol}</span><h3 className="mt-1 truncate font-semibold tracking-[-.02em]">{item.companyName}</h3></div>
+            <div><span className="font-data text-xs font-medium tracking-[.04em] text-primary">{item.symbol}</span><h3 className="mt-1 truncate text-[15px] font-semibold tracking-[-.02em]">{item.companyName}</h3></div>
             <SeverityPill severity={item.attention.severity} />
           </div>
-          <p className="mt-3 line-clamp-2 text-sm leading-6 text-muted-foreground">{item.attention.explanation?.explanation || 'A meaningful move since your last check deserves a closer look.'}</p>
-          <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border/70 pt-3 text-xs text-muted-foreground">
+          <p className="mt-2 line-clamp-2 text-[13px] leading-5 text-muted-foreground">{item.attention.explanation?.explanation || 'A meaningful move since your last check deserves a closer look.'}</p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border/70 pt-3 text-xs text-muted-foreground">
             <span className="font-data">Since check <ChangeValue value={item.attention.sinceLastCheckPercent} /></span>
             <span>{timeAgo(item.attention.sinceLastCheckAt)}</span>
           </div>

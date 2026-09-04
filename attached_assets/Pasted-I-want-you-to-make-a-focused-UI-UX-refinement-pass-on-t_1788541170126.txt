@@ -1,0 +1,189 @@
+I want you to make a focused UI/UX refinement pass on the existing Smart Market Watchlist.
+
+DO NOT rebuild the application.
+DO NOT change the product logic, APIs, database, scoring, detection, authentication, or architecture.
+
+This is specifically a DESIGN QUALITY PASS.
+
+I reviewed the current UI and the main issue is typography and visual positioning.
+
+The current hero heading:
+
+“What deserves
+your attention?”
+
+uses an italic/editorial serif treatment.
+
+REMOVE THIS STYLE.
+
+It currently feels like an editorial/luxury magazine website rather than a premium modern fintech product.
+
+The product is being built for the Groww Build From Scratch hackathon, so the UI needs to feel like a serious, polished fintech product that could plausibly exist inside a modern investing platform.
+
+DESIRED VISUAL DIRECTION:
+
+Modern fintech
+Premium
+Calm
+Analytical
+Trustworthy
+Minimal
+Highly readable
+Data-first
+Groww-quality product thinking
+
+TYPOGRAPHY:
+
+Use the typography direction already specified in DESIGN.md.
+
+Prefer Inter / system-ui / a clean modern sans-serif.
+
+Do NOT use:
+- serif headings
+- italic hero typography
+- decorative editorial fonts
+- handwritten fonts
+- overly expressive typography
+
+The main hero heading should be strong, clean and confident.
+
+For example:
+
+WHAT DESERVES YOUR ATTENTION?
+
+or
+
+What deserves your attention?
+
+but rendered in a clean modern sans-serif with strong weight and excellent spacing.
+
+Do NOT make the heading excessively huge.
+
+The UI should feel like a financial product, not a marketing landing page.
+
+HIERARCHY:
+
+The visual hierarchy should immediately communicate:
+
+1. What changed
+2. What deserves attention
+3. Why it matters
+4. What happened since the user's last check
+
+The attention score and signal severity should remain visually important.
+
+ATTENTION CARDS:
+
+Keep the existing concept of the attention card.
+
+Improve:
+- spacing
+- typography hierarchy
+- score visibility
+- severity badge
+- signal information
+- subtle hover state
+- alignment
+- information density
+
+The card should feel compact and highly intentional.
+
+Avoid making every element into a floating card.
+
+COLORS:
+
+Keep the restrained fintech palette from DESIGN.md.
+
+Use:
+- off-white/light neutral background
+- white surfaces
+- dark primary text
+- muted secondary text
+- restrained green for positive movement
+- restrained red for negative movement
+- amber/orange only for attention/severity
+
+Do NOT introduce:
+- purple
+- neon colors
+- gradients
+- glowing effects
+- glassmorphism
+- AI-style blue/purple gradients
+
+LAYOUT:
+
+The current overall structure is good.
+
+Keep:
+- market status
+- refresh
+- stock search
+- threshold controls
+- ranked attention section
+- normal watchlist
+- explanatory footer/note
+
+But refine the spacing and alignment so the page feels like a deliberately designed fintech product rather than a collection of components.
+
+IMPORTANT:
+
+Do not over-design it.
+
+Do not add:
+- decorative charts
+- unnecessary illustrations
+- stock-market graphics
+- random icons
+- excessive animations
+- fake AI visualizations
+- unnecessary cards
+- gradients
+- dashboards within dashboards
+
+The product's differentiation is the ATTENTION SYSTEM itself.
+
+The UI should make that idea visually obvious.
+
+REFERENCE:
+
+Use the Pesse fintech Dribbble reference I previously provided only for:
+- premium fintech feeling
+- whitespace
+- typography discipline
+- restrained surfaces
+- polished financial-product aesthetic
+- visual calmness
+
+Do NOT copy its branding, logo, assets, exact screens or layout.
+
+RESPONSIVE:
+
+Keep the current desktop-first responsive approach.
+
+Make sure the typography and spacing also work properly on tablet and mobile.
+
+ACCESSIBILITY:
+
+Maintain good contrast, keyboard focus states, semantic HTML and readable font sizes.
+
+FINAL QUALITY BAR:
+
+After making the changes, inspect the actual rendered application.
+
+Ask yourself:
+
+“Would this look credible as a modern fintech product in a Groww hackathon?”
+
+If something looks decorative rather than functional, remove it.
+
+If something looks like generic AI-generated UI, simplify it.
+
+If something looks like an editorial website rather than fintech, replace it.
+
+Make the UI feel:
+CLEAN → FINTECH → INTELLIGENT → TRUSTWORTHY → PREMIUM.
+
+Only modify the UI/UX necessary for this refinement pass.
+Do not break working functionality.
+Run the build after changes and fix any UI/build issues.

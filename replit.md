@@ -1,44 +1,54 @@
-# [Project name]
+# Smart Market Watchlist
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+An attention-first market watchlist that detects meaningful change, explains observable signals, and remembers explicit checkpoints.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
+- `pnpm --filter @workspace/api-server run dev` — run the API server
+- `pnpm --filter @workspace/smart-market-watchlist run dev` — run the web app
 - `pnpm run typecheck` — full typecheck across all packages
+- `pnpm test` — deterministic business-logic tests
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- Required env: `JWT_SECRET` or `SESSION_SECRET`
 
 ## Stack
 
 - pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
+- API: Express 5 + TypeScript
+- DB: MongoDB + Mongoose, with an in-memory fallback for deterministic demos
+- Validation: Zod
+- Auth: JWT + bcryptjs
 - API codegen: Orval (from OpenAPI spec)
 - Build: esbuild (CJS bundle)
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/smart-market-watchlist` — React/Vite app, routes, UI components, and design tokens.
+- `artifacts/api-server/src/engine` — deterministic signal detection, scoring, and explanation.
+- `artifacts/api-server/src/providers` — real/mock market-data adapters and shared cache.
+- `artifacts/api-server/src/store` — Mongoose models and persistence boundary.
+- `lib/api-spec/openapi.yaml` — source-of-truth API contract.
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- The server owns detection, score calculation, event status, and checkpoints; the browser only renders authoritative results.
+- The mock provider is selected by `MOCK_SCENARIO` and stays behind the same interface as the real provider.
+- Opening the dashboard only evaluates current data; it never changes a checkpoint or acknowledges an event.
+- The MongoDB store falls back to an in-memory demo store only when `MONGODB_URI` is not configured.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Authenticated users can build a watchlist, search supported stocks, see ranked attention events, open structured explanations and timelines, set personal thresholds, mark a stock checked, and acknowledge detected events.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep the product calm, explainable, and attention-first; never add trading, prediction, or financial-advice features.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Run OpenAPI codegen after changing `lib/api-spec/openapi.yaml`.
+- `PORT` and `BASE_PATH` are supplied by managed workflows for the web artifact.
 
 ## Pointers
 

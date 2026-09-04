@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Smart Market Watchlist"
+description = "A calm attention system for market watchers that detects meaningful changes in a personal stock watchlist, ranks what deserves attention, explains observable signals, and remembers explicit checkpoints."
+version = "1.0.0"
+id = "artifacts/smart-market-watchlist"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 26119
+
+[services.development]
+run = "pnpm --filter @workspace/smart-market-watchlist run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/smart-market-watchlist", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/smart-market-watchlist/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "26119"
+BASE_PATH = "/"

@@ -1,22 +1,23 @@
 openapi: 3.1.0
 info:
-  # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Smart Market Watchlist REST API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
-    description: Health operations
+  - name: auth
+  - name: watchlist
+  - name: market
+  - name: events
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,13 +25,422 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: Registered user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Authenticated user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /auth/me:
+    get:
+      operationId: getMe
+      tags: [auth]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+  /watchlist:
+    get:
+      operationId: getWatchlist
+      tags: [watchlist]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: User watchlist
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Watchlist"
+  /watchlist/items:
+    post:
+      operationId: addWatchlistItem
+      tags: [watchlist]
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WatchlistItemInput"
+      responses:
+        "201":
+          description: Added watchlist item
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WatchlistItem"
+  /watchlist/items/{symbol}:
+    delete:
+      operationId: removeWatchlistItem
+      tags: [watchlist]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Symbol"
+      responses:
+        "204":
+          description: Removed
+  /watchlist/items/{symbol}/settings:
+    patch:
+      operationId: updateWatchlistSettings
+      tags: [watchlist]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Symbol"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WatchlistSettingsInput"
+      responses:
+        "200":
+          description: Updated settings
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WatchlistItem"
+  /stocks/search:
+    get:
+      operationId: searchStocks
+      tags: [market]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: q
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 40
+      responses:
+        "200":
+          description: Supported stock matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/StockSearchResult"
+  /market/watchlist:
+    get:
+      operationId: getMarketWatchlist
+      tags: [market]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Current market state and ranked attention
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MarketWatchlistResponse"
+  /stocks/{symbol}:
+    get:
+      operationId: getStockDetail
+      tags: [market]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Symbol"
+      responses:
+        "200":
+          description: Stock detail and evidence
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StockDetail"
+  /stocks/{symbol}/checkpoint:
+    post:
+      operationId: updateStockCheckpoint
+      tags: [market]
+      security:
+        - bearerAuth: []
+      parameters:
+        - $ref: "#/components/parameters/Symbol"
+      responses:
+        "200":
+          description: Updated checkpoint
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Checkpoint"
+  /events:
+    get:
+      operationId: getEvents
+      tags: [events]
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Active and recent events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Event"
+  /events/{id}:
+    get:
+      operationId: getEvent
+      tags: [events]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Event detail
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
+  /events/{id}/acknowledge:
+    post:
+      operationId: acknowledgeEvent
+      tags: [events]
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Acknowledged event
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Event"
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    Symbol:
+      in: path
+      name: symbol
+      required: true
+      schema:
+        type: string
+        pattern: "^[A-Za-z0-9._-]{1,12}$"
   schemas:
     HealthStatus:
       type: object
+      required: [status]
       properties:
         status:
           type: string
-      required:
-        - status
-
+    User:
+      type: object
+      required: [id, name, email]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        email: { type: string }
+    AuthResponse:
+      type: object
+      required: [token, user]
+      properties:
+        token: { type: string }
+        user: { $ref: "#/components/schemas/User" }
+    RegisterInput:
+      type: object
+      required: [name, email, password]
+      properties:
+        name: { type: string, minLength: 2, maxLength: 80 }
+        email: { type: string, maxLength: 254 }
+        password: { type: string, minLength: 8, maxLength: 128 }
+    LoginInput:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, maxLength: 254 }
+        password: { type: string, minLength: 8, maxLength: 128 }
+    Watchlist:
+      type: object
+      required: [id, name, items]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/WatchlistItem" }
+    WatchlistItemInput:
+      type: object
+      required: [symbol]
+      properties:
+        symbol: { type: string, pattern: "^[A-Za-z0-9._-]{1,12}$" }
+    WatchlistSettingsInput:
+      type: object
+      required: [thresholdPercent]
+      properties:
+        thresholdPercent: { type: number, minimum: 1, maximum: 25 }
+    WatchlistItem:
+      type: object
+      required: [id, symbol, companyName, exchange, thresholdPercent]
+      properties:
+        id: { type: string }
+        symbol: { type: string }
+        companyName: { type: string }
+        exchange: { type: string }
+        thresholdPercent: { type: number }
+        lastViewedAt: { type: ["string", "null"], format: date-time }
+        lastCheckpointPrice: { type: ["number", "null"] }
+        lastCheckpointTimestamp: { type: ["string", "null"], format: date-time }
+    StockSearchResult:
+      type: object
+      required: [symbol, companyName, exchange, sector]
+      properties:
+        symbol: { type: string }
+        companyName: { type: string }
+        exchange: { type: string }
+        sector: { type: string }
+    Signal:
+      type: object
+      required: [type, label, value, severity, contribution]
+      properties:
+        type: { type: string }
+        label: { type: string }
+        value: { type: number }
+        severity: { type: string }
+        contribution: { type: number }
+        available: { type: boolean }
+    Explanation:
+      type: object
+      required: [fact, signal, context, explanation, unknown, source]
+      properties:
+        fact: { type: string }
+        signal: { type: string }
+        context: { type: string }
+        explanation: { type: string }
+        unknown: { type: string }
+        source: { type: string }
+    Attention:
+      type: object
+      required: [score, severity, sinceLastCheckPercent, sinceLastCheckAt, signals, explanation]
+      properties:
+        score: { type: number, minimum: 0, maximum: 100 }
+        severity: { type: string }
+        sinceLastCheckPercent: { type: number }
+        sinceLastCheckAt: { type: ["string", "null"], format: date-time }
+        signals:
+          type: array
+          items: { $ref: "#/components/schemas/Signal" }
+        explanation: { $ref: "#/components/schemas/Explanation" }
+    MarketItem:
+      type: object
+      required: [symbol, companyName, exchange, price, changePercent, volumeRatio, sectorChangePercent, marketChangePercent, observedAt, source, isStale, attention]
+      properties:
+        symbol: { type: string }
+        companyName: { type: string }
+        exchange: { type: string }
+        sector: { type: string }
+        price: { type: number }
+        changePercent: { type: number }
+        volumeRatio: { type: ["number", "null"] }
+        sectorChangePercent: { type: number }
+        marketChangePercent: { type: number }
+        observedAt: { type: string, format: date-time }
+        source: { type: string }
+        isStale: { type: boolean }
+        marketState: { type: string }
+        attention: { $ref: "#/components/schemas/Attention" }
+        activeEventId: { type: ["string", "null"] }
+    MarketWatchlistResponse:
+      type: object
+      required: [marketState, updatedAt, items, attentionItems]
+      properties:
+        marketState: { type: string }
+        updatedAt: { type: string, format: date-time }
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/MarketItem" }
+        attentionItems:
+          type: array
+          items: { $ref: "#/components/schemas/MarketItem" }
+    TimelineEntry:
+      type: object
+      required: [timestamp, label, detail, kind]
+      properties:
+        timestamp: { type: string, format: date-time }
+        label: { type: string }
+        detail: { type: string }
+        kind: { type: string }
+    StockDetail:
+      type: object
+      required: [item, checkpoint, timeline]
+      properties:
+        item: { $ref: "#/components/schemas/MarketItem" }
+        checkpoint: { $ref: "#/components/schemas/Checkpoint" }
+        timeline:
+          type: array
+          items: { $ref: "#/components/schemas/TimelineEntry" }
+    Checkpoint:
+      type: object
+      required: [lastViewedAt, lastCheckpointPrice, lastCheckpointTimestamp]
+      properties:
+        lastViewedAt: { type: ["string", "null"], format: date-time }
+        lastCheckpointPrice: { type: ["number", "null"] }
+        lastCheckpointTimestamp: { type: ["string", "null"], format: date-time }
+    Event:
+      type: object
+      required: [id, symbol, companyName, detectedAt, score, severity, status, explanation, signals]
+      properties:
+        id: { type: string }
+        symbol: { type: string }
+        companyName: { type: string }
+        detectedAt: { type: string, format: date-time }
+        score: { type: number }
+        severity: { type: string }
+        status: { type: string }
+        acknowledgedAt: { type: ["string", "null"], format: date-time }
+        explanation: { $ref: "#/components/schemas/Explanation" }
+        signals:
+          type: array
+          items: { $ref: "#/components/schemas/Signal" }

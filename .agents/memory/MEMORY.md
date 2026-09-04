@@ -1,0 +1,1 @@
+- [OpenAPI codegen compatibility](openapi-codegen-quirks.md) — keep the contract compatible with the workspace's Zod 3 generator until the generator is upgraded.

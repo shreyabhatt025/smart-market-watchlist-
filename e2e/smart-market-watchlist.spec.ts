@@ -203,6 +203,12 @@ async function expectNoHorizontalOverflow(page: Page) {
   expect(overflow.documentWidth, 'the page should not overflow horizontally').toBeLessThanOrEqual(overflow.viewportWidth);
 }
 
+async function waitForStableVisual(page: Page) {
+  await page.evaluate(async () => {
+    await document.fonts.ready;
+  });
+}
+
 test.describe('responsive authenticated dashboard smoke', () => {
   test.beforeEach(async ({ page }) => {
     await mockAuthenticatedApi(page);
@@ -260,11 +266,18 @@ test.describe('responsive authenticated dashboard smoke', () => {
     await expect.poll(async () => (await page.getByTestId('button-close-menu').boundingBox())?.x ?? -1).toBeGreaterThanOrEqual(0);
     await expect(page.getByTestId('button-dismiss-menu')).toBeVisible();
     await expect.poll(async () => (await page.getByTestId('link-nav-preferences').boundingBox())?.x ?? -1).toBeGreaterThanOrEqual(0);
+    await waitForStableVisual(page);
+    await expect(page).toHaveScreenshot('dashboard-mobile-drawer.png', { fullPage: true });
 
     await page.getByTestId('button-close-menu').click();
     await expect(page.getByTestId('button-dismiss-menu')).toHaveCount(0);
     await expect.poll(async () => (await page.getByTestId('button-close-menu').boundingBox())?.x ?? 0).toBeLessThan(0);
     await expect.poll(async () => (await page.getByTestId('link-nav-preferences').boundingBox())?.x ?? 0).toBeLessThan(0);
     await expectNoHorizontalOverflow(page);
+  });
+
+  test('matches the dashboard layout snapshot for its viewport', async ({ page }) => {
+    await waitForStableVisual(page);
+    await expect(page).toHaveScreenshot(`dashboard-${test.info().project.name}.png`, { fullPage: true });
   });
 });

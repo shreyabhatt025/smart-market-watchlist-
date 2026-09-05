@@ -1,0 +1,640 @@
+TOP-20 HACKATHON UI POLISH PASS
+================================
+
+You are working on my existing Smart Market Watchlist application.
+
+IMPORTANT:
+This is a FINAL UI/UX POLISH PASS.
+
+DO NOT rebuild the application.
+DO NOT change the backend architecture.
+DO NOT change APIs.
+DO NOT change MongoDB models.
+DO NOT change authentication.
+DO NOT change detection logic.
+DO NOT change Attention Score calculations.
+DO NOT change checkpoint behavior.
+DO NOT add new product features.
+
+The product functionality is already built.
+
+Your job is to make the EXISTING product look and feel like a polished, premium fintech product suitable for the Groww Build From Scratch hackathon.
+
+I am competing against a large number of submissions, so the UI must feel intentional, differentiated and production-quality — NOT like a generic AI-generated dashboard.
+
+SOURCE OF TRUTH:
+Use the existing PRD.md, DESIGN.md, TECH_STACK.md and IMPLEMENTATION_PLAN.md already provided in this project.
+
+The existing product concept must remain:
+
+WATCH → DETECT → PRIORITIZE → EXPLAIN → ACKNOWLEDGE
+
+The key product idea is:
+
+“Groww's normal watchlist tells you what you're watching.
+Our Smart Market Watchlist tells you what deserves your attention — and explains why.”
+
+==================================================
+1. OVERALL VISUAL DIRECTION
+==================================================
+
+Make the application feel:
+
+- premium fintech
+- calm
+- trustworthy
+- analytical
+- modern
+- minimal
+- data-first
+- highly readable
+- intentional
+
+It should feel like a serious financial product, not a landing page and not an AI demo.
+
+Think:
+“intelligent financial workspace”
+
+NOT:
+“AI dashboard”
+
+Avoid visual trends that make the application look generic.
+
+DO NOT ADD:
+- gradients
+- glassmorphism
+- glowing effects
+- neon colors
+- purple AI aesthetics
+- decorative illustrations
+- 3D graphics
+- excessive animations
+- unnecessary charts
+- excessive shadows
+- excessive rounded cards
+- random decorative icons
+- fake AI badges
+- “Powered by AI” marketing
+- unnecessary metrics
+
+Use whitespace and hierarchy as the main design tools.
+
+==================================================
+2. HERO / MAIN HEADING
+==================================================
+
+The current hero heading is:
+
+“What deserves your attention?”
+
+KEEP THE WORDING if it works with the current product.
+
+BUT remove any editorial/serif/italic styling.
+
+It must use a clean modern fintech sans-serif.
+
+Use Inter/system-ui or the existing typography specified in DESIGN.md.
+
+The heading should feel:
+
+confident
+clean
+sharp
+financial
+product-oriented
+
+NOT:
+- magazine/editorial
+- luxury fashion
+- handwritten
+- decorative
+
+Do not make it unnecessarily enormous.
+
+The hierarchy should be approximately:
+
+small eyebrow
+↓
+strong hero heading
+↓
+short explanatory sentence
+↓
+market status/actions
+
+The hero should not consume excessive vertical space.
+
+==================================================
+3. HERO COPY
+==================================================
+
+Keep the concept clear.
+
+The supporting copy should communicate that the watchlist is ranked based on meaningful changes since the user's last check.
+
+Use concise language.
+
+Avoid marketing-heavy language.
+
+Preferred direction:
+
+“A considered read of your watchlist, ranked by what changed since you last checked.”
+
+This concept should remain.
+
+==================================================
+4. HEADER
+==================================================
+
+Refine the top navigation/header.
+
+It should feel like a real fintech workspace.
+
+Keep it minimal.
+
+The header should communicate:
+- product/workspace identity
+- market status
+- current context
+
+Avoid excessive navigation.
+
+On smaller screens:
+- no overlapping elements
+- no clipped text
+- no absolute-position collisions
+- no horizontal overflow
+
+The header must gracefully reflow.
+
+==================================================
+5. MARKET STATUS
+==================================================
+
+Keep the “Market open” / market status concept.
+
+Make it visually subtle.
+
+It should look like useful product information, not a large CTA.
+
+Use restrained status colors.
+
+The “Updated X ago” information should remain secondary.
+
+==================================================
+6. SEARCH + THRESHOLDS
+==================================================
+
+The search bar is an important primary interaction.
+
+Make it visually clean and easy to identify.
+
+Desktop:
+Search and “Tune thresholds” can remain side-by-side.
+
+Tablet/mobile:
+They must stack or reflow naturally.
+
+Minimum touch target:
+44px, preferably 48px.
+
+No cramped controls.
+
+No horizontal overflow.
+
+==================================================
+7. ATTENTION SECTION
+==================================================
+
+This is the HEART of the product.
+
+The visual hierarchy must communicate:
+
+WHAT CHANGED
+↓
+WHAT DESERVES ATTENTION
+↓
+WHY
+↓
+WHAT HAPPENED SINCE LAST CHECK
+
+Keep:
+
+“RANKED SIGNAL”
+
+and:
+
+“Worth a closer look”
+
+These are good product language and should remain unless there is a strong reason to change them.
+
+Do NOT replace the attention system with a generic stock table.
+
+==================================================
+8. ATTENTION CARD
+==================================================
+
+The attention card should be the strongest component on the dashboard.
+
+Keep the existing information:
+
+- rank
+- company
+- score
+- severity
+- key signals
+- since-last-check change
+- explanation/context
+
+Improve only the visual hierarchy.
+
+The user's eye should naturally move:
+
+Company
+→ Attention score
+→ Severity
+→ What changed
+→ Why
+
+The score should be visible but NOT look like a gaming progress meter.
+
+Avoid oversized circular gauges.
+
+Severity should use restrained color.
+
+Positive/negative financial movement should remain readable and accessible.
+
+==================================================
+9. EXPLANATION
+==================================================
+
+One of the most important product details is that the system does NOT pretend to know causality.
+
+For example, the current style:
+
+“The move coincides with sector +1.8% and market +0.6%. These are observable signals, not a confirmed cause.”
+
+This is GOOD.
+
+PRESERVE THIS PRODUCT PRINCIPLE.
+
+Do not turn it into:
+
+“AI says Tata Motors is rising because…”
+
+Do not invent causal explanations.
+
+The interface should distinguish:
+
+FACT
+SIGNAL
+CONTEXT
+EXPLANATION
+UNKNOWN
+
+as defined by the product specification.
+
+==================================================
+10. “ATTENTION IS NOT A RECOMMENDATION”
+==================================================
+
+The current footer/message communicates:
+
+“Attention is not a recommendation.”
+
+KEEP THE PRINCIPLE.
+
+However, refine the presentation so it feels like a product principle rather than a legal disclaimer.
+
+Preferred direction:
+
+“Attention is a signal, not a recommendation.”
+
+Then:
+
+“We surface meaningful changes since your last check — so you can decide what deserves a closer look.”
+
+The exact wording can be refined slightly if needed, but preserve the meaning.
+
+Avoid large marketing phrases such as:
+“Stay curious.”
+
+A better tone is:
+
+“Understand first. Decide yourself.”
+
+or another concise, product-oriented statement.
+
+This section should be subtle and trustworthy.
+
+==================================================
+11. NORMAL WATCHLIST
+==================================================
+
+Keep the “Normal watchlist” / wider-read concept.
+
+It should visually sit below the attention section.
+
+It should feel secondary.
+
+Do not make normal stocks visually compete with attention events.
+
+If the list is empty, the empty state should be clean and useful.
+
+Avoid oversized empty-state illustrations.
+
+==================================================
+12. RESPONSIVE DESIGN — VERY IMPORTANT
+==================================================
+
+The screenshots revealed a serious responsive issue.
+
+FIX IT COMPLETELY.
+
+Desktop:
+- preserve current structure
+
+Tablet:
+- reflow naturally
+
+Mobile:
+- single-column layout
+- header must not overlap
+- hero heading must wrap
+- description must wrap
+- search must stack
+- threshold control must stack
+- attention cards must become single column
+- no clipped text
+- no horizontal scrolling
+- no elements sitting on top of unrelated elements
+
+DO NOT simply shrink desktop UI.
+
+Mobile should look intentionally designed.
+
+==================================================
+13. TRANSPARENCY / OVERLAY BUG
+==================================================
+
+There was also an interaction bug where clicking the UI caused portions of the page to appear transparent/washed out.
+
+FIX THE ROOT CAUSE.
+
+Inspect:
+- opacity
+- backdrop
+- modal/drawer state
+- z-index
+- fixed overlays
+- transitions
+- focus/active states
+- parent opacity
+- transforms
+- conditional rendering
+
+After opening/closing any interactive element:
+
+- page must remain fully opaque
+- no invisible overlay should remain
+- text must remain readable
+- buttons must remain clickable
+- scrolling must work
+
+Do NOT hide the problem with arbitrary CSS.
+
+==================================================
+14. TYPOGRAPHY
+==================================================
+
+Use a consistent type system from DESIGN.md.
+
+Prefer:
+
+Inter / system-ui
+
+Strong hierarchy:
+
+Eyebrow:
+small uppercase / tracking
+
+Hero:
+large but controlled
+strong weight
+modern sans-serif
+
+Section:
+clear semibold heading
+
+Body:
+high readability
+
+Metadata:
+smaller and muted
+
+Do not mix multiple unrelated fonts.
+
+Do not use italic serif headings.
+
+Do not make everything bold.
+
+==================================================
+15. SPACING
+==================================================
+
+Use a consistent spacing rhythm.
+
+Prefer the existing DESIGN.md spacing system.
+
+Give important sections breathing room.
+
+Avoid:
+- cramped cards
+- huge empty gaps
+- inconsistent padding
+- arbitrary margins
+
+The interface should feel designed on a grid.
+
+==================================================
+16. COLORS
+==================================================
+
+Use the palette already defined in DESIGN.md.
+
+Maintain:
+
+- light neutral background
+- white surfaces
+- dark primary text
+- muted secondary text
+- restrained green
+- restrained red
+- restrained amber for attention
+- subtle borders
+
+Do not introduce a new color system.
+
+Do not turn the app into a trading terminal.
+
+==================================================
+17. MICRO-INTERACTIONS
+==================================================
+
+Only add subtle interaction polish where useful:
+
+- hover
+- focus
+- pressed state
+- small transitions
+
+Keep animations fast and restrained.
+
+Respect reduced-motion preferences.
+
+No dramatic animation when a card appears.
+
+No glowing effects.
+
+==================================================
+18. ORIGINALITY
+==================================================
+
+Do NOT try to make the UI unique by adding decorative elements.
+
+The originality should come from the PRODUCT MODEL:
+
+A watchlist that prioritizes meaningful changes since the user's last check.
+
+The visual design should reinforce that idea.
+
+The reviewer should immediately understand:
+
+“I don't have to scan everything.
+The product tells me what deserves a closer look.”
+
+This is more important than visual novelty.
+
+==================================================
+19. DO NOT COPY GROW / PESSE
+==================================================
+
+The provided Pesse fintech Dribbble reference is inspiration only.
+
+Use it only for:
+- premium fintech feeling
+- whitespace
+- typography discipline
+- restrained surfaces
+- calm visual language
+- polished financial-product presentation
+
+DO NOT copy:
+- logo
+- branding
+- assets
+- exact layout
+- exact screens
+- exact component designs
+
+Do not attempt to clone Groww's existing UI either.
+
+The product should have its own identity.
+
+==================================================
+20. HACKATHON JUDGE TEST
+==================================================
+
+After polishing, inspect the actual rendered application and evaluate it from a judge's perspective.
+
+Within 5 seconds, can the reviewer understand:
+
+1. What is this?
+2. What makes it different from a normal watchlist?
+3. What deserves my attention?
+4. Why did this stock receive attention?
+5. What changed since my last check?
+
+If the answer is not visually obvious, improve hierarchy — NOT by adding more features.
+
+==================================================
+21. CODE QUALITY
+==================================================
+
+This is a UI polish pass, but maintain engineering quality.
+
+Do not create unnecessary components.
+
+Do not introduce a new UI framework.
+
+Do not add unnecessary dependencies.
+
+Remove dead CSS only if safe.
+
+Keep components readable.
+
+Avoid giant style files.
+
+Do not generate repetitive AI-looking code.
+
+Every change must have a clear purpose.
+
+==================================================
+22. FINAL VERIFICATION
+==================================================
+
+After making the changes:
+
+1. Run the application.
+2. Check desktop viewport.
+3. Check tablet viewport.
+4. Check mobile viewport.
+5. Test search.
+6. Test threshold interaction.
+7. Test attention card interaction.
+8. Test stock detail navigation.
+9. Test acknowledge/checkpoint flow.
+10. Test any modal/drawer.
+11. Verify transparency bug is gone.
+12. Verify no horizontal overflow.
+13. Verify no overlapping text.
+14. Verify no clipped content.
+15. Verify keyboard focus.
+16. Verify build succeeds.
+
+DO NOT change working backend/product behavior.
+
+DO NOT add new features.
+
+DO NOT publish automatically.
+
+At the end, report:
+- what UI issues you fixed
+- what responsive issues you fixed
+- what caused the transparency bug
+- whether the build passes
+
+FINAL DESIGN PRINCIPLE:
+
+The application should feel like:
+
+CLEAN
+↓
+FINTECH
+↓
+INTELLIGENT
+↓
+TRUSTWORTHY
+↓
+PREMIUM
+
+Not:
+
+FLASHY
+↓
+AI-GENERATED
+↓
+OVER-DESIGNED
+
+The goal is not to make the biggest-looking interface.
+
+The goal is to make the Smart Market Watchlist look like a thoughtful financial product that deserves to be selected.

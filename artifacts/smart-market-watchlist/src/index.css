@@ -119,3 +119,12 @@
 .animate-rise-2 { animation-delay: .12s; }
 .animate-rise-3 { animation-delay: .18s; }
 .live-mark { animation: pulse-line 2.4s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

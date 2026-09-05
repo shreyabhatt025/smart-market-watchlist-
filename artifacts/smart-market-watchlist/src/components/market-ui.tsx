@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { ArrowDownRight, ArrowUpRight, CircleHelp, Minus, RefreshCw, Sparkles, TriangleAlert, X } from 'lucide-react';
+import { ArrowDownRight, ArrowUpRight, CircleHelp, Minus, RefreshCw, TriangleAlert, X } from 'lucide-react';
 import { Link } from 'wouter';
 import type { Attention, MarketItem, Signal } from '@workspace/api-client-react';
 import { formatDate, formatPercent, formatPrice, timeAgo, titleCase } from '@/lib/format';
@@ -65,7 +65,7 @@ export function ScoreRing({ score, compact = false }: { score: number; compact?:
 
 export function AttentionCard({ item, rank }: { item: MarketItem; rank: number }) {
   return <Link href={`/stocks/${item.symbol}`} className="focus-ring group block" data-testid={`card-attention-${item.symbol}`}>
-    <Card className="relative h-full overflow-hidden border-card-border bg-card shadow-none transition-colors duration-200 group-hover:border-accent/60 group-hover:bg-card/80">
+    <Card className="relative h-full overflow-hidden border-card-border bg-card shadow-none transition-colors duration-200 group-hover:border-accent/60 group-hover:bg-card">
       <div className="absolute inset-y-0 left-0 w-1 bg-accent" />
       <div className="flex h-full gap-4 p-4 pl-5 sm:p-5 sm:pl-6">
         <div className="flex flex-col items-center gap-2">
@@ -125,7 +125,7 @@ export function SignalBars({ signals }: { signals: Signal[] }) {
 export function ExplanationBlock({ item }: { item: MarketItem }) {
   const explanation = item.attention.explanation;
   return <div className="space-y-4">
-    <div className="rounded-xl bg-primary/6 p-4"><div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[.12em] text-primary"><Sparkles className="size-4" /> Why this surfaced</div><p className="mt-3 text-sm leading-6">{explanation?.explanation || 'There is not enough context to explain this movement yet.'}</p></div>
+     <div className="rounded-xl bg-primary/6 p-4"><p className="eyebrow text-primary">Why this surfaced</p><p className="mt-3 text-sm leading-6">{explanation?.explanation || 'There is not enough context to explain this movement yet.'}</p></div>
     <dl className="divide-y divide-border/70 rounded-xl border border-border/70">
       {[['Fact', explanation?.fact], ['Signal', explanation?.signal], ['Context', explanation?.context], ['Source', explanation?.source]].map(([label, value]) => <div className="grid gap-1 p-4 sm:grid-cols-[90px_1fr] sm:gap-4" key={label}><dt className="eyebrow text-muted-foreground">{label}</dt><dd className="text-sm leading-6">{value || 'Unavailable'}</dd></div>)}
     </dl>

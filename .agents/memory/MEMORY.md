@@ -1,1 +1,2 @@
 - [OpenAPI codegen compatibility](openapi-codegen-quirks.md) — keep the contract compatible with the workspace's Zod 3 generator until the generator is upgraded.
+- [Browser smoke runtime](browser-smoke-runtime.md) — Playwright Chromium needs its browser binary and Linux shared libraries provisioned before e2e checks can run.

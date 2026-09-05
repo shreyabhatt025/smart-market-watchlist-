@@ -72,6 +72,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/User"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /watchlist:
     get:
       operationId: getWatchlist
@@ -85,6 +87,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Watchlist"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /watchlist/items:
     post:
       operationId: addWatchlistItem
@@ -104,6 +108,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WatchlistItem"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /watchlist/items/{symbol}:
     delete:
       operationId: removeWatchlistItem
@@ -115,6 +121,8 @@ paths:
       responses:
         "204":
           description: Removed
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /watchlist/items/{symbol}/settings:
     patch:
       operationId: updateWatchlistSettings
@@ -136,6 +144,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/WatchlistItem"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /stocks/search:
     get:
       operationId: searchStocks
@@ -159,6 +169,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/StockSearchResult"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /market/watchlist:
     get:
       operationId: getMarketWatchlist
@@ -172,6 +184,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MarketWatchlistResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /stocks/{symbol}:
     get:
       operationId: getStockDetail
@@ -187,6 +201,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/StockDetail"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /stocks/{symbol}/checkpoint:
     post:
       operationId: updateStockCheckpoint
@@ -202,6 +218,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Checkpoint"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /events:
     get:
       operationId: getEvents
@@ -217,6 +235,8 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /events/{id}:
     get:
       operationId: getEvent
@@ -236,6 +256,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
   /events/{id}/acknowledge:
     post:
       operationId: acknowledgeEvent
@@ -255,12 +277,21 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Event"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
 components:
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  responses:
+    Unauthorized:
+      description: Missing, malformed, or expired bearer token
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
   parameters:
     Symbol:
       in: path
@@ -283,6 +314,18 @@ components:
         id: { type: string }
         name: { type: string }
         email: { type: string }
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error:
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              enum: [AUTH_ERROR]
+            message: { type: string }
     AuthResponse:
       type: object
       required: [token, user]
